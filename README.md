@@ -1,12 +1,12 @@
-# AWS FIS MCP Server
+# Resilience Architect MCP
 
-An MCP server for designing and running controlled chaos engineering experiments on your AWS resources, helping you build more resilient cloud applications.
+Your proactive chaos engineering companion that analyzes infrastructure code and designs targeted resilience experiments before problems occur.
 
 ## Description
 
-This MCP server bridges the gap between AI assistants and AWS Fault Injection Simulator (FIS), enabling controlled chaos engineering experiments through natural language interactions. The server implements the Model Context Protocol to expose FIS capabilities as tools that Large Language Models can understand and utilize.
+The Resilience Architect MCP bridges the gap between infrastructure analysis and chaos engineering by proactively examining your AWS infrastructure blueprints (CloudFormation templates, CDK code, Terraform) and automatically designing appropriate fault injection experiments. This MCP server implements the Model Context Protocol to expose AWS Fault Injection Simulator (FIS) capabilities through an intelligent architectural lens.
 
-With this integration, AI assistants can help users design resilience testing scenarios, identify appropriate AWS resources for fault injection, create experiment templates with precise parameters, execute controlled failures, and analyze the results—all while maintaining safety guardrails and following AWS best practices for chaos engineering.
+The Resilience Architect doesn't just run chaos experiments—it thinks like a solutions architect to understand your infrastructure patterns, identify potential failure points, and craft targeted resilience tests. By analyzing your infrastructure code ahead of time, it helps you build more resilient systems through preemptive chaos engineering rather than reactive troubleshooting.
 
 The server provides the following MCP tools:
 

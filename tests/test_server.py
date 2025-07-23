@@ -14,9 +14,9 @@
 
 """Comprehensive tests for the AWS FIS MCP server implementation."""
 
-import aws_fis_mcp_server.server as server_module
+import resilience_architect_mcp.server as server_module
 import pytest
-from aws_fis_mcp_server.server import (
+from resilience_architect_mcp.server import (
     create_experiment_template,
     create_view,
     discover_relationships,
@@ -835,7 +835,7 @@ class TestResourceDiscovery:
         self.mock_resource_explorer.search.return_value = {'Resources': []}
 
         # Import the search_resources function
-        from aws_fis_mcp_server.server import search_resources
+        from resilience_architect_mcp.server import search_resources
 
         # Call the function
         result = await search_resources(
@@ -858,7 +858,7 @@ class TestResourceDiscovery:
         )
 
         # Import the search_resources function
-        from aws_fis_mcp_server.server import search_resources
+        from resilience_architect_mcp.server import search_resources
 
         # Call the function and expect exception
         with pytest.raises(ClientError):

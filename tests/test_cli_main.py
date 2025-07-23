@@ -14,22 +14,22 @@
 
 """Tests for CLI argument parsing and main function."""
 
-import aws_fis_mcp_server.server as server_module
+import resilience_architect_mcp.server as server_module
 import pytest
 import sys
-from aws_fis_mcp_server.server import main
+from resilience_architect_mcp.server import main
 from unittest.mock import patch
 
 
 class TestCliMain:
     """Test cases for CLI argument parsing and main function."""
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     def test_main_default_arguments(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function with default arguments."""
-        with patch.object(sys, 'argv', ['aws-fis-mcp-server']):
+        with patch.object(sys, 'argv', ['resilience-architect-mcp']):
             main()
 
         # With default arguments, initialize_aws_clients should not be called
@@ -48,13 +48,13 @@ class TestCliMain:
         # Verify MCP server was started
         mock_mcp_run.assert_called_once()
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     def test_main_with_all_arguments(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function with all CLI arguments provided."""
         test_args = [
-            'aws-fis-mcp-server',
+            'resilience-architect-mcp',
             '--aws-profile',
             'test-profile',
             '--aws-region',
@@ -81,26 +81,26 @@ class TestCliMain:
         assert server_module.aws_profile_override == 'test-profile'
         assert server_module.aws_region_override == 'eu-west-1'
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     @patch.dict('os.environ', {'AWS_REGION': 'us-west-2'})
     def test_main_with_environment_region(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function uses environment variable for region."""
-        with patch.object(sys, 'argv', ['aws-fis-mcp-server']):
+        with patch.object(sys, 'argv', ['resilience-architect-mcp']):
             main()
 
         # With only environment variable set, initialize_aws_clients should not be called
         # because no custom CLI parameters were provided
         mock_initialize.assert_not_called()
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     @patch.dict('os.environ', {'AWS_REGION': 'us-west-2'})
     def test_main_cli_overrides_environment(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test CLI argument overrides environment variable."""
-        test_args = ['aws-fis-mcp-server', '--aws-region', 'ap-southeast-1']
+        test_args = ['resilience-architect-mcp', '--aws-region', 'ap-southeast-1']
 
         with patch.object(sys, 'argv', test_args):
             main()
@@ -108,12 +108,12 @@ class TestCliMain:
         # CLI argument provided, so initialize_aws_clients should be called
         mock_initialize.assert_called_once_with('ap-southeast-1', None)
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     def test_main_profile_only(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function with only profile argument."""
-        test_args = ['aws-fis-mcp-server', '--aws-profile', 'production']
+        test_args = ['resilience-architect-mcp', '--aws-profile', 'production']
 
         with patch.object(sys, 'argv', test_args):
             main()
@@ -129,12 +129,12 @@ class TestCliMain:
             False,
         )
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     def test_main_region_only(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function with only region argument."""
-        test_args = ['aws-fis-mcp-server', '--aws-region', 'ca-central-1']
+        test_args = ['resilience-architect-mcp', '--aws-region', 'ca-central-1']
 
         with patch.object(sys, 'argv', test_args):
             main()
@@ -142,12 +142,12 @@ class TestCliMain:
         # Should use region with default profile (None)
         mock_initialize.assert_called_once_with('ca-central-1', None)
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.logger')
     def test_main_allow_writes_only(self, mock_logger, mock_initialize, mock_mcp_run):
         """Test main function with only allow-writes flag."""
-        test_args = ['aws-fis-mcp-server', '--allow-writes']
+        test_args = ['resilience-architect-mcp', '--allow-writes']
 
         with patch.object(sys, 'argv', test_args):
             main()
@@ -166,14 +166,14 @@ class TestCliMain:
             True,
         )
 
-    @patch('aws_fis_mcp_server.server.mcp.run')
-    @patch('aws_fis_mcp_server.server.initialize_aws_clients')
+    @patch('resilience_architect_mcp.server.mcp.run')
+    @patch('resilience_architect_mcp.server.initialize_aws_clients')
     def test_main_initialization_error_propagates(self, mock_initialize, mock_mcp_run):
         """Test that initialization errors are propagated when custom parameters are provided."""
         mock_initialize.side_effect = Exception('AWS initialization failed')
 
         # Use custom region to trigger initialize_aws_clients call
-        with patch.object(sys, 'argv', ['aws-fis-mcp-server', '--aws-region', 'us-west-1']):
+        with patch.object(sys, 'argv', ['resilience-architect-mcp', '--aws-region', 'us-west-1']):
             with pytest.raises(Exception, match='AWS initialization failed'):
                 main()
 
@@ -184,7 +184,7 @@ class TestCliMain:
 
     def test_main_argument_parser_help(self):
         """Test that argument parser help works correctly."""
-        test_args = ['aws-fis-mcp-server', '--help']
+        test_args = ['resilience-architect-mcp', '--help']
 
         with patch.object(sys, 'argv', test_args):
             with pytest.raises(SystemExit) as exc_info:
@@ -195,7 +195,7 @@ class TestCliMain:
 
     def test_main_invalid_argument(self):
         """Test handling of invalid arguments."""
-        test_args = ['aws-fis-mcp-server', '--invalid-argument']
+        test_args = ['resilience-architect-mcp', '--invalid-argument']
 
         with patch.object(sys, 'argv', test_args):
             with pytest.raises(SystemExit) as exc_info:

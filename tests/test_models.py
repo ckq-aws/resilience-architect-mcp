@@ -15,7 +15,7 @@
 """Tests for data models in the AWS FIS MCP server."""
 
 import pytest
-from aws_fis_mcp_server.models import (
+from resilience_architect_mcp.models import (
     Action,
     ExperimentActionsMode,
     ExperimentState,

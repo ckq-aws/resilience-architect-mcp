@@ -1,7 +1,7 @@
 [project]
-name = "aws-fis-mcp-server"
+name = "resilience-architect-mcp"
 version = "0.1.0"
-description = "AWS Fault Injection Simulator (FIS) MCP Server for controlled chaos engineering experiments"
+description = "Resilience Architect MCP - Analyzes infrastructure code and designs proactive chaos engineering experiments"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [project.scripts]
-"aws-fis-mcp-server" = "aws_fis_mcp_server.server:main"
+"resilience-architect-mcp" = "resilience_architect_mcp.server:main"
 
 # [project.urls]
 # Update these URLs to point to your actual repository when ready
@@ -41,7 +41,7 @@ version = "0.1.0"
 tag_format = "$version"
 version_files = [
     "pyproject.toml:version",
-    "aws_fis_mcp_server/__init__.py:__version__"
+    "resilience_architect_mcp/__init__.py:__version__"
 ]
 update_changelog_on_bump = true
 
@@ -67,15 +67,15 @@ exclude_also = [
     'except ImportError',
 ]
 omit = [
-    "*/aws_fis_mcp_server/models.py",
-    "*/aws_fis_mcp_server/consts.py",
+    "*/resilience_architect_mcp/models.py",
+    "*/resilience_architect_mcp/consts.py",
 ]
 
 [tool.coverage.run]
-source = ["aws_fis_mcp_server"]
+source = ["resilience_architect_mcp"]
 
 [tool.pyright]
-include = ["aws_fis_mcp_server", "tests"]
+include = ["resilience_architect_mcp", "tests"]
 exclude = ["**/__pycache__", "**/.venv"]
 typeCheckingMode = "basic"
 reportMissingImports = true

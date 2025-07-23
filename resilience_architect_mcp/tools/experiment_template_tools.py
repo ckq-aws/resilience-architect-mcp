@@ -92,7 +92,7 @@ async def create_experiment_template(
     try:
         from ..server import allow_writes, aws_fis
     except ImportError:
-        from aws_fis_mcp_server.server import allow_writes, aws_fis
+        from resilience_architect_mcp.server import allow_writes, aws_fis
 
     if aws_fis is None:
         raise Exception(
@@ -221,7 +221,7 @@ async def update_experiment_template(
         try:
             from ..server import aws_fis
         except ImportError:
-            from aws_fis_mcp_server.server import aws_fis
+            from resilience_architect_mcp.server import aws_fis
 
         if aws_fis is None:
             raise Exception(

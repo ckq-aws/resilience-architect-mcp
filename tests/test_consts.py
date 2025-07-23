@@ -15,7 +15,7 @@
 
 """Tests for constants in the AWS FIS MCP server."""
 
-from aws_fis_mcp_server import consts
+from resilience_architect_mcp import consts
 
 
 class TestConstants:

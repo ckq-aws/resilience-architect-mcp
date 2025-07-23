@@ -62,8 +62,8 @@ try:
     )
 except ImportError:
     # Fallback for direct script execution
-    from aws_fis_mcp_server import __version__
-    from aws_fis_mcp_server.consts import (
+    from resilience_architect_mcp import __version__
+    from resilience_architect_mcp.consts import (
         AWS_CONFIG_MAX_ATTEMPTS,
         AWS_CONFIG_RETRY_MODE,
         AWS_CONFIG_SIGNATURE_VERSION,
@@ -76,18 +76,18 @@ except ImportError:
         SERVICE_RESOURCE_EXPLORER,
         SERVICE_S3,
     )
-    from aws_fis_mcp_server.tools.experiment_template_tools import (
+    from resilience_architect_mcp.tools.experiment_template_tools import (
         create_experiment_template,
         update_experiment_template,
     )
-    from aws_fis_mcp_server.tools.fis_service_tools import (
+    from resilience_architect_mcp.tools.fis_service_tools import (
         get_experiment_details,
         get_experiment_template,
         list_all_fis_experiments,
         list_experiment_templates,
         start_experiment,
     )
-    from aws_fis_mcp_server.tools.resource_discovery_tools import (
+    from resilience_architect_mcp.tools.resource_discovery_tools import (
         create_view,
         discover_relationships,
         get_stack_resources,
@@ -142,7 +142,7 @@ def init_default_clients():
             region_name=region,
             signature_version=AWS_CONFIG_SIGNATURE_VERSION,
             retries={'max_attempts': AWS_CONFIG_MAX_ATTEMPTS, 'mode': AWS_CONFIG_RETRY_MODE},
-            user_agent_extra=f'aws-fis-mcp-server/{__version__}',
+            user_agent_extra=f'resilience-architect-mcp/{__version__}',
         )
 
         # Initialize AWS clients
@@ -180,7 +180,7 @@ def initialize_aws_clients(region: str, profile: Optional[str] = None):
             region_name=region,
             signature_version=AWS_CONFIG_SIGNATURE_VERSION,
             retries={'max_attempts': AWS_CONFIG_MAX_ATTEMPTS, 'mode': AWS_CONFIG_RETRY_MODE},
-            user_agent_extra=f'aws-fis-mcp-server/{__version__}',
+            user_agent_extra=f'resilience-architect-mcp/{__version__}',
         )
 
         # Initialize AWS clients
@@ -198,11 +198,11 @@ def initialize_aws_clients(region: str, profile: Optional[str] = None):
 
 
 mcp = FastMCP(
-    'aws-fis-mcp-server',
+    'resilience-architect-mcp',
     instructions="""
-# AWS FIS MCP Server
+# Resilience Architect MCP
 
-This MCP server provides tools for creating, managing, and executing AWS Fault Injection Simulator (FIS) experiments. It enables AI assistants to help users design resilient systems through controlled fault injection.
+The Resilience Architect analyzes your infrastructure code and designs proactive chaos engineering experiments. This MCP server provides tools for creating, managing, and executing AWS Fault Injection Simulator (FIS) experiments based on your infrastructure blueprints.
 
 ## Available Tools
 
@@ -262,7 +262,7 @@ def main():
     global allow_writes, aws_profile_override, aws_region_override
 
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description='AWS Fault Injection Simulator (FIS) MCP Server')
+    parser = argparse.ArgumentParser(description='Resilience Architect MCP - Proactive Chaos Engineering from Infrastructure Analysis')
     parser.add_argument(
         '--aws-profile',
         help='AWS profile to use for credentials (default: uses default profile or environment)',
@@ -288,7 +288,7 @@ def main():
     effective_region = aws_region_override or os.getenv(ENV_AWS_REGION, DEFAULT_AWS_REGION)
 
     logger.info(
-        'AWS FIS MCP Server starting with AWS_PROFILE: %s, AWS_REGION: %s, ALLOW_WRITES: %s',
+        'Resilience Architect MCP starting with AWS_PROFILE: %s, AWS_REGION: %s, ALLOW_WRITES: %s',
         aws_profile_override or 'default',
         effective_region,
         allow_writes,
@@ -299,7 +299,7 @@ def main():
         initialize_aws_clients(effective_region, aws_profile_override)
 
     # Start the MCP server
-    logger.info('AWS FIS MCP server starting')
+    logger.info('Resilience Architect MCP starting')
     mcp.run()
 
 

@@ -14,9 +14,9 @@
 
 """Tests for AWS client initialization functionality."""
 
-import aws_fis_mcp_server.server as server_module
+import resilience_architect_mcp.server as server_module
 import pytest
-from aws_fis_mcp_server.server import initialize_aws_clients
+from resilience_architect_mcp.server import initialize_aws_clients
 from unittest.mock import MagicMock, patch
 
 
@@ -97,7 +97,7 @@ class TestInitializeAwsClients:
             initialize_aws_clients('us-east-1')
 
     @patch('boto3.Session')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.logger')
     def test_initialize_aws_clients_success_logging(self, mock_logger, mock_session_class):
         """Test success logging during client initialization."""
         mock_session = MagicMock()
@@ -112,7 +112,7 @@ class TestInitializeAwsClients:
         )
 
     @patch('boto3.Session')
-    @patch('aws_fis_mcp_server.server.logger')
+    @patch('resilience_architect_mcp.server.logger')
     def test_initialize_aws_clients_error_logging(self, mock_logger, mock_session_class):
         """Test error logging during client initialization."""
         error_msg = 'Network timeout'

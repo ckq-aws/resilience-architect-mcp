@@ -43,7 +43,7 @@ async def list_all_fis_experiments(ctx: Context) -> Dict[str, Dict[str, Any]]:
         try:
             from ..server import aws_fis
         except ImportError:
-            from aws_fis_mcp_server.server import aws_fis
+            from resilience_architect_mcp.server import aws_fis
 
         if aws_fis is None:
             raise Exception(
@@ -104,7 +104,7 @@ async def get_experiment_details(
         try:
             from ..server import aws_fis
         except ImportError:
-            from aws_fis_mcp_server.server import aws_fis
+            from resilience_architect_mcp.server import aws_fis
 
         response = aws_fis.get_experiment(id=id)
         return response.get('experiment', {})
@@ -128,7 +128,7 @@ async def list_experiment_templates(ctx: Context) -> List[Dict[str, Any]]:
         try:
             from ..server import aws_fis
         except ImportError:
-            from aws_fis_mcp_server.server import aws_fis
+            from resilience_architect_mcp.server import aws_fis
 
         if aws_fis is None:
             raise Exception(
@@ -169,7 +169,7 @@ async def get_experiment_template(
         try:
             from ..server import aws_fis
         except ImportError:
-            from aws_fis_mcp_server.server import aws_fis
+            from resilience_architect_mcp.server import aws_fis
 
         if aws_fis is None:
             raise Exception(
@@ -216,7 +216,7 @@ async def start_experiment(
     try:
         from ..server import allow_writes, aws_fis
     except ImportError:
-        from aws_fis_mcp_server.server import allow_writes, aws_fis
+        from resilience_architect_mcp.server import allow_writes, aws_fis
 
     if aws_fis is None:
         raise Exception(

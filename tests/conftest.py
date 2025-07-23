@@ -15,7 +15,7 @@
 """Test fixtures for AWS FIS MCP server tests."""
 
 # Import the server module to patch its components
-import aws_fis_mcp_server.server as server_module
+import resilience_architect_mcp.server as server_module
 import boto3
 import pytest
 from mcp.server.fastmcp import Context

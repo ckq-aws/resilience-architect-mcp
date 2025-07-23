@@ -49,7 +49,7 @@ async def list_cfn_stacks(ctx: Context) -> Dict[str, Any]:
         try:
             from ..server import cloudformation
         except ImportError:
-            from aws_fis_mcp_server.server import cloudformation
+            from resilience_architect_mcp.server import cloudformation
 
         if cloudformation is None:
             raise Exception(
@@ -93,7 +93,7 @@ async def get_stack_resources(
         try:
             from ..server import cloudformation
         except ImportError:
-            from aws_fis_mcp_server.server import cloudformation
+            from resilience_architect_mcp.server import cloudformation
 
         if cloudformation is None:
             raise Exception(
@@ -130,7 +130,7 @@ async def list_views(ctx: Context) -> List[Dict[str, Any]]:
         try:
             from ..server import resource_explorer
         except ImportError:
-            from aws_fis_mcp_server.server import resource_explorer
+            from resilience_architect_mcp.server import resource_explorer
 
         if resource_explorer is None:
             raise Exception(
@@ -188,7 +188,7 @@ async def search_resources(
         try:
             from ..server import resource_explorer
         except ImportError:
-            from aws_fis_mcp_server.server import resource_explorer
+            from resilience_architect_mcp.server import resource_explorer
 
         if resource_explorer is None:
             raise Exception(
@@ -250,7 +250,7 @@ async def create_view(
     try:
         from ..server import allow_writes, resource_explorer
     except ImportError:
-        from aws_fis_mcp_server.server import allow_writes, resource_explorer
+        from resilience_architect_mcp.server import allow_writes, resource_explorer
 
     if resource_explorer is None:
         raise Exception(
@@ -335,7 +335,7 @@ async def discover_relationships(
         try:
             from ..server import aws_config_client
         except ImportError:
-            from aws_fis_mcp_server.server import aws_config_client
+            from resilience_architect_mcp.server import aws_config_client
 
         if aws_config_client is None:
             raise Exception(

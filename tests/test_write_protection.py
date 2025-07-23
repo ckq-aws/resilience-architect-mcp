@@ -14,9 +14,9 @@
 
 """Tests for write protection functionality."""
 
-import aws_fis_mcp_server.server as server_module
+import resilience_architect_mcp.server as server_module
 import pytest
-from aws_fis_mcp_server.server import (
+from resilience_architect_mcp.server import (
     create_experiment_template,
     create_view,
     start_experiment,
