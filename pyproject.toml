@@ -1,0 +1,87 @@
+[project]
+name = "aws-fis-mcp-server"
+version = "0.1.0"
+description = "AWS Fault Injection Simulator (FIS) MCP Server for controlled chaos engineering experiments"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aws-cdk-lib>=2.200.1",
+    "boto3>=1.38.32",
+    "python-dotenv>=1.0.0",
+    "loguru>=0.7.3",
+    "mcp[cli]>=1.9.3",
+    "pydantic>=2.11.5",
+]
+
+[project.scripts]
+"aws-fis-mcp-server" = "aws_fis_mcp_server.server:main"
+
+# [project.urls]
+# Update these URLs to point to your actual repository when ready
+# Homepage = "https://github.com/your-username/aws-fis-mcp-server"
+# Documentation = "https://github.com/your-username/aws-fis-mcp-server#readme"
+# Source = "https://github.com/your-username/aws-fis-mcp-server"
+# "Bug Tracker" = "https://github.com/your-username/aws-fis-mcp-server/issues"
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.2.2",
+    "pre-commit>=4.1.0",
+    "ruff>=0.9.7",
+    "pyright>=1.1.398",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.11.1",
+    "pytest-asyncio>=0.26.0",
+]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "$version"
+version_files = [
+    "pyproject.toml:version",
+    "aws_fis_mcp_server/__init__.py:__version__"
+]
+update_changelog_on_bump = true
+
+[tool.pytest.ini_options]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+testpaths = [ "tests"]
+asyncio_mode = "auto"
+markers = [
+    "live: marks tests that make live API calls (deselect with '-m \"not live\"')",
+    "asyncio: marks tests that use asyncio"
+]
+
+[tool.coverage.report]
+exclude_also = [
+    'pragma: no cover',
+    'if __name__ == .__main__.:\n    main()',
+    'def __repr__',
+    'raise NotImplementedError',
+    'pass',
+    'raise ImportError',
+    'except ImportError',
+]
+omit = [
+    "*/aws_fis_mcp_server/models.py",
+    "*/aws_fis_mcp_server/consts.py",
+]
+
+[tool.coverage.run]
+source = ["aws_fis_mcp_server"]
+
+[tool.pyright]
+include = ["aws_fis_mcp_server", "tests"]
+exclude = ["**/__pycache__", "**/.venv"]
+typeCheckingMode = "basic"
+reportMissingImports = true
+reportMissingTypeStubs = false
+reportUnboundVariable = true
+reportCallIssue = "warning"
+
+[tool.uv]
+package = true
